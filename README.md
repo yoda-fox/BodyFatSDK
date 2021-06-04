@@ -60,7 +60,10 @@
 
 ### 结果回调：
  @Override
-    public void onStatus(int i, String s) { }//返回初始化状态0成功，-1失败
+    public void onStatus(int i, String s) {//返回初始化状态0成功，-1失败
+    
+    }
+    
 ### 2)调用获取人体各项数据的接口，需要开启蓝牙。
             Map<String, Object> params = new HashMap<>();
             params.put(Constants.LOGIN_ACCOUNT, "email2@163.com");//用户账号
@@ -72,6 +75,7 @@
             params.put(Constants.MAC, "AA:BB:CC:DD:EE:FF");//指定体脂称的mac地址(选填)
 	    //getBodyParameter()函数调用前必须开启蓝牙和获取位置信息权限
             BodySDKManager.getInstance().getBodyParameter(params, MainActivity.this);
+	    
 ### 结果回调：
 	  @Override
     public void onDataSuccess(BodyConfig bodyFatConfig) {
@@ -103,7 +107,7 @@
         builder.append(";健康等级：").append(bodyFatConfig.getHealthLevel());
         builder.append(";身体得分：").append(bodyFatConfig.getBodyScore());
         builder.append(";身体类型：").append(bodyFatConfig.getBodyType());
-	builder.append(";阻抗类型：").append(bodyFatConfig.getImpedanceStatus());//状态说明：1-手脚都接触电极，2-只是脚接触秤电极，3-只是手接触手柄电极，-1手脚都没接触电极
+	  builder.append(";阻抗类型：").append(bodyFatConfig.getImpedanceStatus());//状态说明：1-手脚都接触电极，2-只是脚接触秤电极，3-只是手接触手柄电极，-1手脚都没接触电极
         tvResult.setText(builder.toString());
     }
 
