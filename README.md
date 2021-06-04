@@ -7,7 +7,7 @@
 
 ## 1.在budid.gradle(Module:app)文件里添加依赖：
 
-      implementation 'com.github.yoda-fox:bodyfatlib:1.0.3'
+      implementation 'com.github.yoda-fox:BodyFatDemo:1.0.0'
 
 ## 2.在budid.gradle(Project:projectName)里添加
 
