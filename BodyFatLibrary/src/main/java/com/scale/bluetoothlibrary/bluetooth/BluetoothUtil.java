@@ -100,7 +100,6 @@ public class BluetoothUtil {
                     serialNumber = scanRecord[3] & 0xff;
                     float decimal;//保留的小数点位数
                     double weight;//体重
-                    String unit;//单位
                     switch (StringUtil.getTwoBit(scanRecord[10], 5, 7)) {
                         case "00":
                             decimal = 10f;
@@ -112,19 +111,24 @@ public class BluetoothUtil {
                             decimal = 1f;
                             break;
                     }
-                    weight = ((scanRecord[4] & 0xff) * 256 + (scanRecord[5] & 0xff)) / decimal;//重量
                     switch (StringUtil.getTwoBit(scanRecord[10], 3, 5)) {
                         case "01"://斤
-                            unit = "斤";
+                          //  unit = "斤";
+                            weight = (((scanRecord[4] & 0xff) * 256 + (scanRecord[5] & 0xff)) / decimal) / 2f;
                             break;
                         case "10"://lb
-                            unit = "lb";
+                         //   unit = "lb";
+                            weight = (((scanRecord[4] & 0xff) * 256 + (scanRecord[5] & 0xff)) / decimal) * 0.4536;
                             break;
                         case "11"://st:lb
-                            unit = "st:lb";
+                           // unit = "st:lb";
+                            int st = (int) (((scanRecord[4] & 0xff) * 256 + (scanRecord[5] & 0xff)) / decimal);
+                            float lb = ((scanRecord[4] & 0xff) * 256 + (scanRecord[5] & 0xff)) / decimal - st;
+                            weight = st * 6.3503 + lb * 0.4536;
                             break;
                         default://kg
-                            unit = "kg";
+                            // unit = "kg";
+                            weight = ((scanRecord[4] & 0xff) * 256 + (scanRecord[5] & 0xff)) / decimal;
                             break;
                     }
                     int impedance = (scanRecord[6] & 0xff) * 256 + (scanRecord[7] & 0xff);
@@ -133,7 +137,7 @@ public class BluetoothUtil {
                     deviceConfig.setName(result.getDevice().getName());
                     deviceConfig.setAddress(result.getDevice().getAddress());
                     deviceConfig.setWeight(weight);
-                    deviceConfig.setUnit(unit);
+                    deviceConfig.setUnit("kg");
                     deviceConfig.setImpedance(impedance);
                     deviceConfig.setData(StringUtil.bytes2HexString(scanRecord));
                     bluetoothSearchListener.onSearchCallback(deviceConfig);
