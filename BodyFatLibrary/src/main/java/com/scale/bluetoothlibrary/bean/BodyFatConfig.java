@@ -72,4 +72,38 @@ public class BodyFatConfig implements Serializable {
         this.impedanceStatus = bodyFatBean.getImpedanceStatus();
         this.mac = bodyFatBean.getMac();
     }
+
+    /*
+     * 肥胖等级
+     * <p>
+     * 0.无肥胖
+     * 1.肥胖1级
+     * 2.肥胖2级
+     * 3.肥胖3级
+     * 4.肥胖4级
+     */
+
+    /*
+     * 健康等级
+     * <p>
+     * 1.偏瘦
+     * 2.标准
+     * 3.超重
+     * 4.肥胖
+     */
+
+    /*
+     * 身体类型
+     *
+     * 1.偏瘦型
+     * 2.偏瘦肌肉型
+     * 3.标准型
+     * 4.标准肌肉型
+     * 5.缺乏运动型
+     * 6.偏胖型
+     * 7.偏胖肌肉型
+     * 8.浮肿肥胖型
+     * 9.肥胖型
+     * 10.肥胖肌肉型
+     */
 }

@@ -1,7 +1,5 @@
 package com.scale.bluetoothlibrary.bean;
 
-import java.io.Serializable;
-
 public class BodyFatBean {
     private int height;
     private int age;

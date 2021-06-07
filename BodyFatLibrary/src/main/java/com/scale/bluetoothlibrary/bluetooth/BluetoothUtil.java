@@ -24,6 +24,7 @@ public class BluetoothUtil {
     private String mac;
     private String startWith = "10 FF";
     private String TAG = "BluetoothUtil";
+    private boolean searchStatus;
 
     public static BluetoothUtil getInstance() {
         if (bluetoothUtil == null) {
@@ -53,6 +54,7 @@ public class BluetoothUtil {
      * 搜索部分
      */
     public void searchDevice(Object mac) {
+        if (searchStatus) return;
         this.mac = "";
         if (mac instanceof String) {
             this.mac = (String) mac;
@@ -65,6 +67,7 @@ public class BluetoothUtil {
         settings.setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY);
         if (scanner != null) {
             Log.e(TAG, "startScan");
+            searchStatus = true;
             scanner.startScan(null, settings.build(), leCallback);
         }
     }
@@ -84,6 +87,7 @@ public class BluetoothUtil {
         @Override
         public void onScanFailed(int errorCode) {
             super.onScanFailed(errorCode);
+            stopSearchDevice();
             Log.e("TAG", "scanFailed=" + errorCode);
         }
     };
@@ -133,6 +137,7 @@ public class BluetoothUtil {
                     deviceConfig.setImpedance(impedance);
                     deviceConfig.setData(StringUtil.bytes2HexString(scanRecord));
                     bluetoothSearchListener.onSearchCallback(deviceConfig);
+                    stopSearchDevice();
                 }
             }
         }
@@ -140,7 +145,8 @@ public class BluetoothUtil {
 
     public void stopSearchDevice() {
         if (scanner != null) {
-            scanner.startScan(leCallback);
+            scanner.stopScan(leCallback);
+            searchStatus = false;
             Log.e("TAG", "stopSearch");
         }
     }
