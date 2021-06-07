@@ -3,301 +3,73 @@ package com.scale.bluetoothlibrary.bean;
 import java.io.Serializable;
 
 public class BodyFatConfig implements Serializable {
-    private int height;
-    private int age;
-    private int sex;
-    private int impedance;
-    private double weight;
-    private double BMI;
-    private double fatRate;
-    private double fatKg;
-    private double subcutaneousFatRate;
-    private double subcutaneousFatKg;
-    private double muscleRate;
-    private double muscleKg;
-    private double waterRate;
-    private double waterKg;
-    private int visceralFat;
-    private double visceralFatKg;
-    private double boneRate;
-    private double boneKg;
-    private double BMR;
-    private double proteinPercentageRate;
-    private double proteinPercentageKg;
-    private double bodyAge;
-    private int bodyScore;
-    private double standardWeight;
-    private double notFatWeight;
-    private double controlWeight;
-    private double controlFatKg;
-    private double controlMuscleKg;
-    private String obesityLevel;
-    private String healthLevel;
-    private String bodyType;
-    private int impedanceStatus;
-    private String mac;
-
-    public int getImpedanceStatus() {
-        return impedanceStatus;
-    }
-
-    public void setImpedanceStatus(int impedanceStatus) {
-        this.impedanceStatus = impedanceStatus;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public int getSex() {
-        return sex;
-    }
-
-    public void setSex(int sex) {
-        this.sex = sex;
-    }
-
-    public int getImpedance() {
-        return impedance;
-    }
-
-    public void setImpedance(int impedance) {
-        this.impedance = impedance;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public double getBMI() {
-        return BMI;
-    }
-
-    public void setBMI(double BMI) {
-        this.BMI = BMI;
-    }
-
-    public double getFatRate() {
-        return fatRate;
-    }
-
-    public void setFatRate(double fatRate) {
-        this.fatRate = fatRate;
-    }
-
-    public double getFatKg() {
-        return fatKg;
-    }
-
-    public void setFatKg(double fatKg) {
-        this.fatKg = fatKg;
-    }
-
-    public double getSubcutaneousFatRate() {
-        return subcutaneousFatRate;
-    }
-
-    public void setSubcutaneousFatRate(double subcutaneousFatRate) {
-        this.subcutaneousFatRate = subcutaneousFatRate;
-    }
-
-    public double getSubcutaneousFatKg() {
-        return subcutaneousFatKg;
-    }
-
-    public void setSubcutaneousFatKg(double subcutaneousFatKg) {
-        this.subcutaneousFatKg = subcutaneousFatKg;
-    }
-
-    public double getMuscleRate() {
-        return muscleRate;
-    }
-
-    public void setMuscleRate(double muscleRate) {
-        this.muscleRate = muscleRate;
-    }
-
-    public double getMuscleKg() {
-        return muscleKg;
-    }
-
-    public void setMuscleKg(double muscleKg) {
-        this.muscleKg = muscleKg;
-    }
-
-    public double getWaterRate() {
-        return waterRate;
-    }
-
-    public void setWaterRate(double waterRate) {
-        this.waterRate = waterRate;
-    }
-
-    public double getWaterKg() {
-        return waterKg;
-    }
-
-    public void setWaterKg(double waterKg) {
-        this.waterKg = waterKg;
-    }
-
-    public int getVisceralFat() {
-        return visceralFat;
-    }
-
-    public void setVisceralFat(int visceralFat) {
-        this.visceralFat = visceralFat;
-    }
-
-    public double getVisceralFatKg() {
-        return visceralFatKg;
-    }
-
-    public void setVisceralFatKg(double visceralFatKg) {
-        this.visceralFatKg = visceralFatKg;
-    }
-
-    public double getBoneRate() {
-        return boneRate;
-    }
-
-    public void setBoneRate(double boneRate) {
-        this.boneRate = boneRate;
-    }
-
-    public double getBoneKg() {
-        return boneKg;
-    }
-
-    public void setBoneKg(double boneKg) {
-        this.boneKg = boneKg;
-    }
-
-    public double getBMR() {
-        return BMR;
-    }
-
-    public void setBMR(double BMR) {
-        this.BMR = BMR;
-    }
-
-    public double getProteinPercentageRate() {
-        return proteinPercentageRate;
-    }
-
-    public void setProteinPercentageRate(double proteinPercentageRate) {
-        this.proteinPercentageRate = proteinPercentageRate;
-    }
-
-    public double getProteinPercentageKg() {
-        return proteinPercentageKg;
-    }
-
-    public void setProteinPercentageKg(double proteinPercentageKg) {
-        this.proteinPercentageKg = proteinPercentageKg;
-    }
-
-    public int getBodyAge() {
-        return (int)bodyAge;
-    }
-
-    public void setBodyAge(double bodyAge) {
-        this.bodyAge = bodyAge;
-    }
-
-    public int getBodyScore() {
-        return bodyScore;
-    }
-
-    public void setBodyScore(int bodyScore) {
-        this.bodyScore = bodyScore;
-    }
-
-    public double getStandardWeight() {
-        return standardWeight;
-    }
-
-    public void setStandardWeight(double standardWeight) {
-        this.standardWeight = standardWeight;
-    }
-
-    public double getNotFatWeight() {
-        return notFatWeight;
-    }
-
-    public void setNotFatWeight(double notFatWeight) {
-        this.notFatWeight = notFatWeight;
-    }
-
-    public double getControlWeight() {
-        return controlWeight;
-    }
-
-    public void setControlWeight(double controlWeight) {
-        this.controlWeight = controlWeight;
-    }
-
-    public double getControlFatKg() {
-        return controlFatKg;
-    }
-
-    public void setControlFatKg(double controlFatKg) {
-        this.controlFatKg = controlFatKg;
-    }
-
-    public double getControlMuscleKg() {
-        return controlMuscleKg;
-    }
-
-    public void setControlMuscleKg(double controlMuscleKg) {
-        this.controlMuscleKg = controlMuscleKg;
-    }
-
-    public String getObesityLevel() {
-        return obesityLevel;
-    }
-
-    public void setObesityLevel(String obesityLevel) {
-        this.obesityLevel = obesityLevel;
-    }
-
-    public String getHealthLevel() {
-        return healthLevel;
-    }
-
-    public void setHealthLevel(String healthLevel) {
-        this.healthLevel = healthLevel;
-    }
-
-    public String getBodyType() {
-        return bodyType;
-    }
-
-    public void setBodyType(String bodyType) {
-        this.bodyType = bodyType;
-    }
-
-    public String getMac() {
-        return mac;
-    }
-
-    public void setMac(String mac) {
-        this.mac = mac;
+    public int height;
+    public int age;
+    public int sex;
+    public int impedance;
+    public double weight;
+    public double BMI;
+    public double fatRate;
+    public double fatKg;
+    public double subcutaneousFatRate;
+    public double subcutaneousFatKg;
+    public double muscleRate;
+    public double muscleKg;
+    public double waterRate;
+    public double waterKg;
+    public int visceralFat;
+    public double visceralFatKg;
+    public double boneRate;
+    public double boneKg;
+    public double BMR;
+    public double proteinPercentageRate;
+    public double proteinPercentageKg;
+    public int bodyAge;
+    public int bodyScore;
+    public double standardWeight;
+    public double notFatWeight;
+    public double controlWeight;
+    public double controlFatKg;
+    public double controlMuscleKg;
+    public int obesityLevel;
+    public int healthLevel;
+    public int bodyType;
+    public int impedanceStatus;
+    public String mac;
+
+    public BodyFatConfig(BodyFatBean bodyFatBean) {
+        this.height = bodyFatBean.getHeight();
+        this.age = bodyFatBean.getAge();
+        this.sex = bodyFatBean.getSex();
+        this.impedance = bodyFatBean.getImpedance();
+        this.weight = bodyFatBean.getWeight();
+        this.BMI = bodyFatBean.getBMI();
+        this.fatRate = bodyFatBean.getFatRate();
+        this.fatKg = bodyFatBean.getFatKg();
+        this.subcutaneousFatRate = bodyFatBean.getSubcutaneousFatRate();
+        this.subcutaneousFatKg = bodyFatBean.getSubcutaneousFatKg();
+        this.muscleRate = bodyFatBean.getMuscleRate();
+        this.muscleKg = bodyFatBean.getMuscleKg();
+        this.waterRate = bodyFatBean.getWaterRate();
+        this.waterKg = bodyFatBean.getWaterKg();
+        this.visceralFat = bodyFatBean.getVisceralFat();
+        this.visceralFatKg = bodyFatBean.getVisceralFatKg();
+        this.boneRate = bodyFatBean.getBoneRate();
+        this.boneKg = bodyFatBean.getBoneKg();
+        this.BMR = bodyFatBean.getBMR();
+        this.proteinPercentageRate = bodyFatBean.getProteinPercentageRate();
+        this.proteinPercentageKg = bodyFatBean.getProteinPercentageKg();
+        this.bodyAge = bodyFatBean.getBodyAge();
+        this.bodyScore = bodyFatBean.getBodyScore();
+        this.standardWeight = bodyFatBean.getStandardWeight();
+        this.notFatWeight = bodyFatBean.getNotFatWeight();
+        this.controlWeight = bodyFatBean.getControlWeight();
+        this.controlFatKg = bodyFatBean.getControlFatKg();
+        this.controlMuscleKg = bodyFatBean.getControlMuscleKg();
+        this.obesityLevel = bodyFatBean.getObesityLevel();
+        this.healthLevel = bodyFatBean.getHealthLevel();
+        this.bodyType = bodyFatBean.getBodyType();
+        this.impedanceStatus = bodyFatBean.getImpedanceStatus();
+        this.mac = bodyFatBean.getMac();
     }
 }

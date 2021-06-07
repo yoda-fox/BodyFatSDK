@@ -3,6 +3,7 @@ package com.scale.bluetoothlibrary.util;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.scale.bluetoothlibrary.bean.BodyFatBean;
 import com.scale.bluetoothlibrary.bean.BodyFatConfig;
 import com.scale.bluetoothlibrary.listener.OnConfigListener;
 import com.scale.bluetoothlibrary.listener.OnStatusListener;
@@ -118,10 +119,10 @@ public class HttpUtil {
                         if (code == 1000) {
                             JSONObject dataJson = jsonObject.getJSONObject("data");
                             Gson gson1 = new Gson();
-                            BodyFatConfig bodyFatConfig = gson1.fromJson(dataJson.toString(), BodyFatConfig.class);
-                            bodyFatConfig.setMac(mac);
+                            BodyFatBean bodyFatBean = gson1.fromJson(dataJson.toString(), BodyFatBean.class);
+                            bodyFatBean.setMac(mac);
                             if (onConfigListener != null) {
-                                onConfigListener.onDataSuccess(bodyFatConfig);
+                                onConfigListener.onDataSuccess(new BodyFatConfig(bodyFatBean));
                             }
                         } else {
                             if (onConfigListener != null) {
