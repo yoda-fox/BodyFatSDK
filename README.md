@@ -107,7 +107,7 @@
         builder.append(";健康等级：").append(bodyFatConfig.getHealthLevel());
         builder.append(";身体得分：").append(bodyFatConfig.getBodyScore());
         builder.append(";身体类型：").append(bodyFatConfig.getBodyType());
-	  builder.append(";阻抗类型：").append(bodyFatConfig.getImpedanceStatus());//状态说明：1-手脚都接触电极，2-只是脚接触秤电极，3-只是手接触手柄电极，-1手脚都没接触电极
+	  builder.append(";阻抗类型：").append(bodyFatConfig.getImpedanceStatus());
         tvResult.setText(builder.toString());
     }
 
@@ -163,8 +163,8 @@
  控制体重|bodyFatConfig.getControlWeight()|double|返回结果：负数是需要减少的量
  脂肪控制量|bodyFatConfig.getControlFatKg()|double|返回结果：负数是需要减少的量
  肌肉控制量|bodyFatConfig.getControlMuscleKg()|double|返回结果：负数是需要减少的量
- 肥胖等级|bodyFatConfig.getObesityLevel()|String|
- 健康等级|bodyFatConfig.getHealthLevel()|String|
+ 肥胖等级|bodyFatConfig.getObesityLevel()|int|0：无肥胖; 1：肥胖1级; 2：肥胖2级; 3：肥胖3级; 4：肥胖4级
+ 健康等级|bodyFatConfig.getHealthLevel()|int|1：偏瘦; 2：标准; 3：超重; 4：肥胖
  身体得分|bodyFatConfig.getBodyScore()|int|
- 身体类型|bodyFatConfig.getBodyType()|String|
- 阻抗类型|bodyFatConfig.getImpedanceStatus()|int|1：手脚都接触电极;2：只是脚接触秤电极;<br> 3：只是手接触手柄电极;4：手脚都没接触电极
+ 身体类型|bodyFatConfig.getBodyType()|int|1：偏瘦型; 2：偏瘦肌肉型; 3：标准型; 4：标准肌肉型;<br>5：缺乏运动型; 6：偏胖型; 7：偏胖肌肉型;<br>8：浮肿肥胖型; 9：肥胖型; 10：肥胖肌肉型
+ 阻抗类型|bodyFatConfig.getImpedanceStatus()|int|1：手脚都接触电极; 2：只是脚接触秤电极;<br> 3：只是手接触手柄电极; 4：手脚都没接触电极
