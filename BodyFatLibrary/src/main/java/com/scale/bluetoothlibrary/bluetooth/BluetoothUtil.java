@@ -10,7 +10,10 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.scale.bluetoothlibrary.util.DataUtil;
 import com.scale.bluetoothlibrary.util.StringUtil;
+
+import java.util.zip.DataFormatException;
 
 public class BluetoothUtil {
     private static BluetoothUtil bluetoothUtil;
@@ -98,39 +101,8 @@ public class BluetoothUtil {
             if (serialNumber != (scanRecord[3] & 0xff)) {
                 if (scanRecord.length >= 11 && (StringUtil.getBit(scanRecord[10], 0) == 1)) {
                     serialNumber = scanRecord[3] & 0xff;
-                    float decimal;//保留的小数点位数
-                    double weight;//体重
-                    switch (StringUtil.getTwoBit(scanRecord[10], 5, 7)) {
-                        case "00":
-                            decimal = 10f;
-                            break;
-                        case "10":
-                            decimal = 100f;
-                            break;
-                        default:
-                            decimal = 1f;
-                            break;
-                    }
-                    switch (StringUtil.getTwoBit(scanRecord[10], 3, 5)) {
-                        case "01"://斤
-                          //  unit = "斤";
-                            weight = (((scanRecord[4] & 0xff) * 256 + (scanRecord[5] & 0xff)) / decimal) / 2f;
-                            break;
-                        case "10"://lb
-                         //   unit = "lb";
-                            weight = (((scanRecord[4] & 0xff) * 256 + (scanRecord[5] & 0xff)) / decimal) * 0.4536;
-                            break;
-                        case "11"://st:lb
-                           // unit = "st:lb";
-                            int st = (int) (((scanRecord[4] & 0xff) * 256 + (scanRecord[5] & 0xff)) / decimal);
-                            float lb = ((scanRecord[4] & 0xff) * 256 + (scanRecord[5] & 0xff)) / decimal - st;
-                            weight = st * 6.3503 + lb * 0.4536;
-                            break;
-                        default://kg
-                            // unit = "kg";
-                            weight = ((scanRecord[4] & 0xff) * 256 + (scanRecord[5] & 0xff)) / decimal;
-                            break;
-                    }
+                    float decimal = DataUtil.getDecimal(StringUtil.getTwoBit(scanRecord[10], 5, 7));//保留的小数点位数
+                    double weight = DataUtil.getWeight(scanRecord, decimal);//体重
                     int impedance = (scanRecord[6] & 0xff) * 256 + (scanRecord[7] & 0xff);
                     DeviceConfig deviceConfig = new DeviceConfig();
                     deviceConfig.setRssi(result.getRssi());
