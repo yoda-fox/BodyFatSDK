@@ -108,6 +108,7 @@
         builder.append(";身体得分：").append(bodyFatConfig.getBodyScore());
         builder.append(";身体类型：").append(bodyFatConfig.getBodyType());
 	  builder.append(";阻抗类型：").append(bodyFatConfig.getImpedanceStatus());
+        builder.append(";设备mac地址：").append(bodyFatConfig.mac);
         tvResult.setText(builder.toString());
     }
 
@@ -140,31 +141,32 @@
 
  数据名称     |获取方法   |数据类型|描述
  -------- | :-----------:  | :-----------: | :-----------:
- 体重|bodyFatConfig.getWeight()|double|
- BMI|bodyFatConfig.getBMI()|double|
- 脂肪率|bodyFatConfig.getFatRate()|double|
- 脂肪量|bodyFatConfig.getFatKg()|double|
- 皮下脂肪率|bodyFatConfig.getSubcutaneousFatRate()|double|
- 皮下脂肪量|bodyFatConfig.getSubcutaneousFatKg()|double|
- 肌肉率|bodyFatConfig.getMuscleRate()|double|
- 肌肉量|bodyFatConfig.getMuscleKg()|double|
- 水分 |bodyFatConfig.getWaterRate()|double|
- 含水量|bodyFatConfig.getWaterKg()|double|
- 内脏脂肪等级|bodyFatConfig.getVisceralFat()|int|
- 内脏脂肪面积|bodyFatConfig.getVisceralFatKg()|double|
- 骨量|bodyFatConfig.getBoneKg()|double|
- 骨率|bodyFatConfig.getBoneRate()|double|
- 基础代谢|bodyFatConfig.getBMR()|double|
- 蛋白质比例|bodyFatConfig.getProteinPercentageRate()|double|
- 蛋白质含量|bodyFatConfig.getProteinPercentageKg()|double|
- 身体年龄|bodyFatConfig.getBodyAge()|int|
- 去脂体重|bodyFatConfig.getNotFatWeight()|double|
- 标准体重|bodyFatConfig.getStandardWeight()|double|
- 控制体重|bodyFatConfig.getControlWeight()|double|返回结果：负数是需要减少的量
- 脂肪控制量|bodyFatConfig.getControlFatKg()|double|返回结果：负数是需要减少的量
- 肌肉控制量|bodyFatConfig.getControlMuscleKg()|double|返回结果：负数是需要减少的量
- 肥胖等级|bodyFatConfig.getObesityLevel()|int|0：无肥胖; 1：肥胖1级; 2：肥胖2级; 3：肥胖3级; 4：肥胖4级
- 健康等级|bodyFatConfig.getHealthLevel()|int|1：偏瘦; 2：标准; 3：超重; 4：肥胖
- 身体得分|bodyFatConfig.getBodyScore()|int|
- 身体类型|bodyFatConfig.getBodyType()|int|1：偏瘦型; 2：偏瘦肌肉型; 3：标准型; 4：标准肌肉型;<br>5：缺乏运动型; 6：偏胖型; 7：偏胖肌肉型;<br>8：浮肿肥胖型; 9：肥胖型; 10：肥胖肌肉型
- 阻抗类型|bodyFatConfig.getImpedanceStatus()|int|1：手脚都接触电极; 2：只是脚接触秤电极;<br> 3：只是手接触手柄电极; 4：手脚都没接触电极
+ 体重|bodyFatConfig.weight|double|
+ BMI|bodyFatConfig.BMI|double|
+ 脂肪率|bodyFatConfig.fatRate|double|
+ 脂肪量|bodyFatConfig.fatKg|double|
+ 皮下脂肪率|bodyFatConfig.subcutaneousFatRate|double|
+ 皮下脂肪量|bodyFatConfig.subcutaneousFatKg|double|
+ 肌肉率|bodyFatConfig.muscleRate|double|
+ 肌肉量|bodyFatConfig.muscleKg|double|
+ 水分 |bodyFatConfig.waterRate|double|
+ 含水量|bodyFatConfig.waterKg|double|
+ 内脏脂肪等级|bodyFatConfig.visceralFat|int|
+ 内脏脂肪面积|bodyFatConfig.visceralFatKg|double|
+ 骨量|bodyFatConfig.boneKg|double|
+ 骨率|bodyFatConfig.boneRate|double|
+ 基础代谢|bodyFatConfig.BMR|double|
+ 蛋白质比例|bodyFatConfig.proteinPercentageRate|double|
+ 蛋白质含量|bodyFatConfig.proteinPercentageKg|double|
+ 身体年龄|bodyFatConfig.bodyAge|int|
+ 去脂体重|bodyFatConfig.notFatWeight|double|
+ 标准体重|bodyFatConfig.standardWeight|double|
+ 控制体重|bodyFatConfig.controlWeight|double|返回结果：负数是需要减少的量
+ 脂肪控制量|bodyFatConfig.controlFatKg|double|返回结果：负数是需要减少的量
+ 肌肉控制量|bodyFatConfig.controlMuscleKg|double|返回结果：负数是需要减少的量
+ 肥胖等级|bodyFatConfig.obesityLevel|int|0：无肥胖; 1：肥胖1级; 2：肥胖2级; 3：肥胖3级; 4：肥胖4级
+ 健康等级|bodyFatConfig.healthLevel|int|1：偏瘦; 2：标准; 3：超重; 4：肥胖
+ 身体得分|bodyFatConfig.bodyScore|int|
+ 身体类型|bodyFatConfig.bodyType|int|1：偏瘦型; 2：偏瘦肌肉型; 3：标准型; 4：标准肌肉型;<br>5：缺乏运动型; 6：偏胖型; 7：偏胖肌肉型;<br>8：浮肿肥胖型; 9：肥胖型; 10：肥胖肌肉型
+ 阻抗类型|bodyFatConfig.impedanceStatus|int|1：手脚都接触电极; 2：只是脚接触秤电极;<br> 3：只是手接触手柄电极; 4：手脚都没接触电极
+ 设备MAC地址|bodyFatConfig.mac|String|返回测量数据的体脂称的设备Mac地址
