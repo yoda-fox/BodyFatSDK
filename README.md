@@ -1,6 +1,6 @@
 # About
 
-[中文文档](https://github.com/yoda-fox/BodyFatSDK/blob/master/BodyFatSDKDocument)  
+[中文文档](https://github.com/yoda-fox/BodyFatSDK/blob/master/Document.md)  
 
 ## 使用条件
     1.The minimum version is android5.0 (API 21)
