@@ -7,7 +7,7 @@
 
 ## 1.在budid.gradle(Module:app)文件里添加依赖：
 
-      implementation 'com.github.yoda-fox:BodyFatSDK:1.0.0'
+      implementation 'com.github.yoda-fox:BodyFatSDK:1.0.2'
 
 ## 2.在budid.gradle(Project:projectName)里添加
 
@@ -107,7 +107,7 @@
         builder.append(";健康等级：").append(bodyFatConfig.healthLevel);
         builder.append(";身体得分：").append(bodyFatConfig.bodyScore);
         builder.append(";身体类型：").append(bodyFatConfig.bodyType);
-	  builder.append(";阻抗类型：").append(bodyFatConfig.impedanceStatus);
+	builder.append(";阻抗类型：").append(bodyFatConfig.impedanceStatus);
         builder.append(";设备mac地址：").append(bodyFatConfig.mac);
         tvResult.setText(builder.toString());
     }
