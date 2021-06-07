@@ -170,5 +170,5 @@
  Health level|bodyFatConfig.healthLevel|int|1: Lean; 2: Standard; 3:Overweight; 4: Obese
  Body score|bodyFatConfig.bodyScore|int|
  Body type|bodyFatConfig.bodyType|int|1: Lean type; 2: Lean muscle type; 3: Standard type;<br>4: Standard muscle type; 5: lack of exercise type; 6: overweight type;<br>7: Obese muscular type; 8: Puffyand obese type; 9: Obese type;<br>10: Obese muscle type
- Impedance type|bodyFatConfig.impedanceStatus|int| **八极秤:** 1: Both hands and feet are in contact with the electrodes; 2: Only the feetare in contact with the electrodes of the scale;<br> 3: Only the hand touches the electrode of the handle; -1: No hand or foot touches the electrode<br> **普通脂肪秤:** 
+ Impedance type|bodyFatConfig.impedanceStatus|int| **八极秤:** 1: Both hands and feet are in contact with the electrodes; 2: Only the feetare in contact with the electrodes of the scale;<br> 3: Only the hand touches the electrode of the handle; -1: No hand or foot touches the electrode<br> **普通脂肪秤:** 1：脚接触秤电极; -1：脚没有接触秤电极
  Device mac address|bodyFatConfig.mac|String|The Mac address of the body fat scale 
