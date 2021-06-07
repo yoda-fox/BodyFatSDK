@@ -1,4 +1,5 @@
 # SDK使用说明文档
+[英文文档](https://github.com/yoda-fox/BodyFatSDK#readme)   
 
 ## 使用条件
     1.最低版本 android5.0（API 21）
