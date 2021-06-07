@@ -167,6 +167,6 @@
  肥胖等级|bodyFatConfig.obesityLevel|int|0：无肥胖; 1：肥胖1级; 2：肥胖2级; 3：肥胖3级; 4：肥胖4级
  健康等级|bodyFatConfig.healthLevel|int|1：偏瘦; 2：标准; 3：超重; 4：肥胖
  身体得分|bodyFatConfig.bodyScore|int|
- 身体类型|bodyFatConfig.bodyType|int|1：偏瘦型; 2：偏瘦肌肉型; 3：标准型; 4：标准肌肉型;<br>5：缺乏运动型; 6：偏胖型; 7：偏胖肌肉型;<br>8：浮肿肥胖型; 9：肥胖型; 10：肥胖肌肉型
+ 身体类型|bodyFatConfig.bodyType|int|1：偏瘦型; 2：偏瘦肌肉型; 3：标准型;<br>4：标准肌肉型; 5：缺乏运动型; 6：偏胖型;<br>7：偏胖肌肉型; 8：浮肿肥胖型; 9：肥胖型;<br>10：肥胖肌肉型
  阻抗类型|bodyFatConfig.impedanceStatus|int|1：手脚都接触电极; 2：只是脚接触秤电极;<br> 3：只是手接触手柄电极; 4：手脚都没接触电极
  设备MAC地址|bodyFatConfig.mac|String|返回测量数据的体脂称的设备Mac地址
