@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">BodyFatDemo</string>
+    <string name="words_obesity_0">No obesity</string>
+    <string name="words_obesity_1">Obesity level 1</string>
+    <string name="words_obesity_2">Obesity level 2</string>
+    <string name="words_obesity_3">Obesity level 3</string>
+    <string name="words_obesity_4">Obesity level 4</string>
+
+    <string name="words_thinner">Lean</string>
+    <string name="words_standard">Standard</string>
+    <string name="words_overweight">Overweight</string>
+    <string name="words_obesity">Obesity</string>
+
+    <string name="words_body_type1">Lean</string>
+    <string name="words_body_type2">Lean muscle type</string>
+    <string name="words_body_type3">Standard</string>
+    <string name="words_body_type4">Standard muscle type</string>
+    <string name="words_body_type5">lack of exercise</string>
+    <string name="words_body_type6">overweight</string>
+    <string name="words_body_type7">Obese muscular</string>
+    <string name="words_body_type8">Puffy and obese</string>
+    <string name="words_body_type9">Obese</string>
+    <string name="words_body_type10">Obese muscle type</string>
+
+    <string name="words_impedance_1">Both hands and feet touch the electrodes</string>
+    <string name="words_impedance_2">Only the foot touches the electrode of the scale</string>
+    <string name="words_impedance_3">Only the hand touches the handle electrode</string>
+    <string name="words_impedance_4">No hands or feet touching the electrodes</string>
+</resources>
