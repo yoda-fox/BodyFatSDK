@@ -1,5 +1,6 @@
 package com.scale.bluetoothlibrary.util;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -54,7 +55,6 @@ public class HttpUtil {
     }
 
     public void getAccessToken(String appid, String secret) {
-        Log.e("TAG", "Language=" + StringUtil.getSystemLanguage());
         if (StringUtil.getSystemLanguage().equals("zh_CN")) {
             baseUrl = "http://lx.yodatech.cn/app/";
         } else {
@@ -108,6 +108,10 @@ public class HttpUtil {
     }
 
     public void getBodyParameter(Map<String, Object> params) {
+        if (TextUtils.isEmpty(accessToken)) {
+            onConfigListener.onDataFail(-3, "token error");
+            return;
+        }
         if (StringUtil.getSystemLanguage().equals("zh_CN")) {
             baseUrl = "http://lx.yodatech.cn/app/";
         } else {

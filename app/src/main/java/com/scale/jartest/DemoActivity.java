@@ -21,6 +21,7 @@ import com.scale.bluetoothlibrary.bean.BodyFatConfig;
 import com.scale.bluetoothlibrary.listener.OnConfigListener;
 import com.scale.bluetoothlibrary.listener.OnStatusListener;
 import com.scale.bluetoothlibrary.util.Constants;
+import com.scale.bluetoothlibrary.util.StringUtil;
 
 import java.util.HashMap;
 import java.util.Map;

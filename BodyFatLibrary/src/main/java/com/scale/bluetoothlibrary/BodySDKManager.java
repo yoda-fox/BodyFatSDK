@@ -1,6 +1,7 @@
 package com.scale.bluetoothlibrary;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.scale.bluetoothlibrary.bluetooth.BluetoothUtil;
 import com.scale.bluetoothlibrary.bluetooth.DeviceConfig;
@@ -8,6 +9,7 @@ import com.scale.bluetoothlibrary.listener.OnConfigListener;
 import com.scale.bluetoothlibrary.listener.OnStatusListener;
 import com.scale.bluetoothlibrary.util.Constants;
 import com.scale.bluetoothlibrary.util.HttpUtil;
+import com.scale.bluetoothlibrary.util.StringUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,16 +44,18 @@ public class BodySDKManager {
             return;
         }
         DeviceConfig deviceConfig = BluetoothUtil.parsingData(scanRecord);
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put(Constants.LOGIN_ACCOUNT, params.get(Constants.LOGIN_ACCOUNT));
-        paramMap.put(Constants.THIRD_USERNO, params.get(Constants.THIRD_USERNO));
-        paramMap.put(Constants.THIRD_NICKNAME, params.get(Constants.THIRD_NICKNAME));
-        paramMap.put(Constants.HEIGHT, params.get(Constants.HEIGHT));
-        paramMap.put(Constants.AGE, params.get(Constants.AGE));
-        paramMap.put(Constants.SEX, params.get(Constants.SEX));
-        paramMap.put(Constants.SCALE_TYPE, params.get(Constants.SCALE_TYPE));
-        paramMap.put(Constants.IMPEDANCE, deviceConfig.getImpedance());
-        paramMap.put(Constants.WEIGHT, deviceConfig.getWeight());
-        HttpUtil.getInstance().getBodyParameter(paramMap);
+        if(deviceConfig!=null) {
+            Map<String, Object> paramMap = new HashMap<>();
+            paramMap.put(Constants.LOGIN_ACCOUNT, params.get(Constants.LOGIN_ACCOUNT));
+            paramMap.put(Constants.THIRD_USERNO, params.get(Constants.THIRD_USERNO));
+            paramMap.put(Constants.THIRD_NICKNAME, params.get(Constants.THIRD_NICKNAME));
+            paramMap.put(Constants.HEIGHT, params.get(Constants.HEIGHT));
+            paramMap.put(Constants.AGE, params.get(Constants.AGE));
+            paramMap.put(Constants.SEX, params.get(Constants.SEX));
+            paramMap.put(Constants.SCALE_TYPE, params.get(Constants.SCALE_TYPE));
+            paramMap.put(Constants.IMPEDANCE, deviceConfig.getImpedance());
+            paramMap.put(Constants.WEIGHT, deviceConfig.getWeight());
+            HttpUtil.getInstance().getBodyParameter(paramMap);
+        }
     }
 }
