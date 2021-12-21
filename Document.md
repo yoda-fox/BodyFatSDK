@@ -6,24 +6,16 @@
     1.最低版本 android5.0（API 21）
     2.依赖环境androidx
 
-
 ## 1.在budid.gradle(Module:app)文件里添加依赖：
-
        implementation 'com.github.yoda-fox:BodyFatSDK:2.1.1'
 
 ## 2.在budid.gradle(Project:projectName)里添加
-
     repositories {
         maven { url 'https://jitpack.io' }
     }
 
 ## 3.在manifest文件里添加权限
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.INTERNET"/>
-
-
-
 
 ## 4.开始接入
 
@@ -106,6 +98,7 @@
  AGE|测量者的年龄(范围：10~99)|int
  SEX|测量者的性别(1:男，0：女)|int
  SCALE_TYPE|秤类型(1.四电极，2.八电极)|int
+ SCAN_RECORD|广播数据包|byte[]
 
 ## 回调结果说明
 ### BodyFatConfig(人体各项数据)
