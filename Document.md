@@ -6,53 +6,16 @@
     1.最低版本 android5.0（API 21）
     2.依赖环境androidx
 
-
 ## 1.在budid.gradle(Module:app)文件里添加依赖：
-
-       implementation 'com.github.yoda-fox:BodyFatSDK:1.0.4'
+       implementation 'com.github.yoda-fox:BodyFatSDK:2.1.1'
 
 ## 2.在budid.gradle(Project:projectName)里添加
-
     repositories {
         maven { url 'https://jitpack.io' }
     }
 
 ## 3.在manifest文件里添加权限
-
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
-
-
-## 安卓6.0及以上系统必须要定位权限，且需要手动获取位置权限
-
-    private void checkPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//6.0以上
-            int[] permissions = {ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION),
-                                  ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)};
-            if (permissions[0] != PackageManager.PERMISSION_GRANTED || permissions[1] != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
-		       Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_ACCESS_LOCATION);
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_CODE_ACCESS_LOCATION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {//用户允许获取位置权限
-
-            } else if (!ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[0])) {//用户拒绝获取位置权限并不再提示
-
-            } else {//用户拒绝获取位置权限
-
-            }
-        }
-    }
 
 ## 4.开始接入
 
@@ -74,43 +37,48 @@
             params.put(Constants.HEIGHT, 170);//身高
             params.put(Constants.AGE, 20);//年龄
             params.put(Constants.SEX, 1);//性别：1-男，0-女
-            params.put(Constants.MAC, "AA:BB:CC:DD:EE:FF");//指定体脂称的mac地址(选填)
-	    //getBodyParameter()函数调用前必须开启蓝牙和获取位置信息权限
-            BodySDKManager.getInstance().getBodyParameter(params, MainActivity.this);
+            params.put(Constants.SCALE_TYPE, 1);//秤类型：1.四电极,2.八电极
+            params.put(Constants.SCAN_RECORD, scanRecord);//扫描设备返回的广播包
+           //Encapsulate request parameters
+        BodySDKManager.getInstance().getBodyParameter(params, MainActivity.this);
 	    
 ### 结果回调：
 	  @Override
     public void onDataSuccess(BodyConfig bodyFatConfig) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("体重：").append(String.format("%.2f", bodyFatConfig.weight));
-        builder.append(";BMI：").append(String.format("%.1f", BMI));
-        builder.append(";脂肪率：").append(String.format("%.1f%% ",fatRate));
-        builder.append(";脂肪量：").append(String.format("%.2fkg ", bodyFatConfig.fatKg));
-        builder.append(";皮下脂肪率：").append(String.format("%.1f%% ", bodyFatConfig.subcutaneousFatRate));
-        builder.append(";皮下脂肪量：").append(String.format("%.2fkg ", bodyFatConfig.subcutaneousFatKg));
-        builder.append(";肌肉率：").append(String.format("%.1f%% ", bodyFatConfig.muscleRate));
-        builder.append(";肌肉量：").append(String.format("%.2fkg ", bodyFatConfig.muscleKg));
-        builder.append(";水分：").append(String.format("%.1f%% ", bodyFatConfig.waterRate));
-        builder.append(";含水量：").append(String.format("%.2fkg ", bodyFatConfig.waterKg));
-        builder.append(";内脏脂肪等级：").append(String.format("%d ", bodyFatConfig.visceralFat));
-        builder.append(";内脏脂肪面积：").append(String.format("%.1fcm² ", bodyFatConfig.visceralFatKg));
-        builder.append(";骨量：").append(String.format("%.2fkg ", bodyFatConfig.boneKg));
-        builder.append(";骨率：").append(String.format("%.1f%% ", bodyFatConfig.boneRate));
-        builder.append(";基础代谢：").append(String.format("%.1f ", bodyFatConfig.BMR));
-        builder.append(";蛋白质比例：").append(String.format("%.1f%% ", bodyFatConfig.proteinPercentageRate));
-        builder.append(";蛋白质含量：").append(String.format("%.2fkg ", bodyFatConfig.proteinPercentageKg));
-        builder.append(";身体年龄：").append(String.format("%d ", (int) bodyFatConfig.bodyAge));
-        builder.append(";去脂体重：").append(String.format("%.2fkg ", bodyFatConfig.notFatWeight));
-        builder.append(";标准体重：").append(String.format("%.2fkg ", bodyFatConfig.standardWeight));
-        builder.append(";控制体重：").append(String.format("%.2fkg ", bodyFatConfig.controlWeight));
-        builder.append(";脂肪控制量：").append(String.format("%.2fkg ", bodyFatConfig.controlFatKg));
-        builder.append(";肌肉控制量：").append(String.format("%.2fkg ", bodyFatConfig.controlMuscleKg));
-        builder.append(";肥胖等级：").append(bodyFatConfig.obesityLevel);
-        builder.append(";健康等级：").append(bodyFatConfig.healthLevel);
-        builder.append(";身体得分：").append(bodyFatConfig.bodyScore);
-        builder.append(";身体类型：").append(bodyFatConfig.bodyType);
-	builder.append(";阻抗类型：").append(bodyFatConfig.impedanceStatus);
-        builder.append(";设备mac地址：").append(bodyFatConfig.mac);
+       StringBuilder builder = new StringBuilder();
+        builder.append("<weight:").append(String.format("%.2f", bodyFatConfig.weight));
+        builder.append("> <BMI:").append(String.format("%.1f", bodyFatConfig.BMI));
+        builder.append("> <fat rate:").append(String.format("%.1f%% ", bodyFatConfig.fatRate));
+        builder.append("> <fat mass:").append(String.format("%.2fkg ", bodyFatConfig.fatKg));
+        builder.append("> <Subcutaneous fat rate:").append(String.format("%.1f%% ", bodyFatConfig.subcutaneousFatRate));
+        builder.append("> <Subcutaneous fat:").append(String.format("%.2fkg ", bodyFatConfig.subcutaneousFatKg));
+        builder.append("> <Muscle rate:").append(String.format("%.1f%% ", bodyFatConfig.muscleRate));
+        builder.append("> <Muscle mass:").append(String.format("%.2fkg ", bodyFatConfig.muscleKg));
+        builder.append("> <Water:").append(String.format("%.1f%% ", bodyFatConfig.waterRate));
+        builder.append("> <Moisture:").append(String.format("%.2fkg ", bodyFatConfig.waterKg));
+        builder.append("> <Visceral fat grade:").append(String.format("%d ", bodyFatConfig.visceralFat));
+        builder.append("> <Visceral fat area:").append(String.format("%.1fcm² ", bodyFatConfig.visceralFatKg));
+        builder.append("> <Bone mass:").append(String.format("%.2fkg ", bodyFatConfig.boneKg));
+        builder.append("> <Bone rate:").append(String.format("%.1f%% ", bodyFatConfig.boneRate));
+        builder.append("> <BMR:").append(String.format("%.1f ", bodyFatConfig.BMR));
+        builder.append("> <Protein rate:").append(String.format("%.1f%% ", bodyFatConfig.proteinPercentageRate));
+        builder.append("> <Protein mass:").append(String.format("%.2fkg ", bodyFatConfig.proteinPercentageKg));
+        builder.append("> <Physical age:").append(String.format("%d ", bodyFatConfig.bodyAge));
+        builder.append("> <Fat free body weight:").append(String.format("%.2fkg ", bodyFatConfig.notFatWeight));
+        builder.append("> <Standard weight:").append(String.format("%.2fkg ", bodyFatConfig.standardWeight));
+        builder.append("> <Weight control:").append(String.format("%.2fkg ", bodyFatConfig.controlWeight));
+        builder.append("> <Fat control:").append(String.format("%.2fkg ", bodyFatConfig.controlFatKg));
+        builder.append("> <Muscle control:").append(String.format("%.2fkg ", bodyFatConfig.controlMuscleKg));
+        builder.append("> <Obesity degree:").append(BodyFatUtil.getObesityLevel(MainActivity.this, bodyFatConfig.obesityLevel));
+        builder.append("> <Health level:").append(BodyFatUtil.getHealthLevel(MainActivity.this, bodyFatConfig.healthLevel));
+        builder.append("> <Body score:").append(bodyFatConfig.bodyScore);
+        builder.append("> <Body type:").append(BodyFatUtil.getBodyType(MainActivity.this, bodyFatConfig.bodyType));
+        builder.append("> <Impedance type:").append(BodyFatUtil.getImpedanceStatus(MainActivity.this, bodyFatConfig.impedanceStatus));
+	builder.append("> <Upper limb fat:").append(bodyFatConfig.upFat);
+        builder.append("> <Lower limb fat:").append(bodyFatConfig.downFat);
+        builder.append("> <Upper limb muscle:").append(bodyFatConfig.upMuscle);
+        builder.append("> <Lower limb muscles:").append(bodyFatConfig.downMuscle);
+        builder.append(">");
         tvResult.setText(builder.toString());
     }
 
@@ -118,13 +86,6 @@
     public void onDataFail(String s) {
     }
 
-### 注销
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        BodySDKManager.getInstance().unInit();
-    }
 
 # 输入参数说明
 
@@ -136,7 +97,8 @@
  HEIGHT|测量者的身高(单位：cm,范围：100~220);|double
  AGE|测量者的年龄(范围：10~99)|int
  SEX|测量者的性别(1:男，0：女)|int
- MAC|测量设备的MAC地址(选填);<br>格式: XX:XX:XX:XX:XX:XX|String
+ SCALE_TYPE|秤类型(1.四电极，2.八电极)|int
+ SCAN_RECORD|广播数据包|byte[]
 
 ## 回调结果说明
 ### BodyFatConfig(人体各项数据)
@@ -171,7 +133,11 @@
  身体得分|bodyFatConfig.bodyScore|int|
  身体类型|bodyFatConfig.bodyType|int|1：偏瘦型; 2：偏瘦肌肉型; 3：标准型;<br>4：标准肌肉型; 5：缺乏运动型; 6：偏胖型;<br>7：偏胖肌肉型; 8：浮肿肥胖型; 9：肥胖型;<br>10：肥胖肌肉型
  阻抗类型|bodyFatConfig.impedanceStatus|int| **八极秤:** 1：手脚都接触电极; 2：只是脚接触秤电极;<br> 3：只是手接触手柄电极; -1：手脚都没接触电极<br> **普通脂肪秤:** 1：脚接触秤电极; -1：脚没有接触秤电极
- 设备MAC地址|bodyFatConfig.mac|String|返回测量数据的体脂秤设备Mac地址
+ 上肢脂肪率|bodyFatConfig.upFat|double|
+ 下肢脂肪率|bodyFatConfig.downFat|double|
+ 上肢肌肉率|bodyFatConfig.upMuscle|double|
+ 下肢肌肉率|bodyFatConfig.downMuscle|double|
+
  
  
 ## 参数范围说明
