@@ -88,6 +88,7 @@ public class DemoActivity extends AppCompatActivity implements BluetoothUtil.Blu
     @SuppressLint("DefaultLocale")
     @Override
     public void onDataSuccess(BodyFatConfig bodyFatConfig) {
+        BluetoothUtil.getInstance().stopSearchDevice();
         StringBuilder builder = new StringBuilder();
         builder.append("<weight:").append(String.format("%.2f", bodyFatConfig.weight));
         builder.append("> <BMI:").append(String.format("%.1f", bodyFatConfig.BMI));
@@ -117,6 +118,10 @@ public class DemoActivity extends AppCompatActivity implements BluetoothUtil.Blu
         builder.append("> <Body score:").append(bodyFatConfig.bodyScore);
         builder.append("> <Body type:").append(BodyFatUtil.getBodyType(DemoActivity.this, bodyFatConfig.bodyType));
         builder.append("> <Impedance type:").append(BodyFatUtil.getImpedanceStatus(DemoActivity.this, bodyFatConfig.impedanceStatus));
+        builder.append("> <Upper limb fat:").append(bodyFatConfig.upFat);
+        builder.append("> <Lower limb fat:").append(bodyFatConfig.downFat);
+        builder.append("> <Upper limb muscle:").append(bodyFatConfig.upMuscle);
+        builder.append("> <Lower limb muscles:").append(bodyFatConfig.downMuscle);
         builder.append(">");
         tvResult.setText(builder.toString());
     }

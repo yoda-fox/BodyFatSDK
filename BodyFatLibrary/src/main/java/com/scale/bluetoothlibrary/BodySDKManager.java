@@ -37,12 +37,8 @@ public class BodySDKManager {
      * get body data
      */
     public void getBodyParameter(Map<String, Object> params, OnConfigListener onConfigListener) {
-        HttpUtil.getInstance().setConfigListener(onConfigListener);
         byte[] scanRecord = (byte[]) params.get(Constants.SCAN_RECORD);
-        if (scanRecord == null || scanRecord.length != 62) {
-            onConfigListener.onDataFail(-1, "Broadcast packet length error");
-            return;
-        }
+        HttpUtil.getInstance().setConfigListener(onConfigListener);
         DeviceConfig deviceConfig = BluetoothUtil.parsingData(scanRecord);
         if(deviceConfig!=null) {
             Map<String, Object> paramMap = new HashMap<>();
