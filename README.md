@@ -139,4 +139,4 @@
  Upper limb fat rate|bodyFatConfig.upFat|double|
  Lower limb fat rate|bodyFatConfig.downFat|double|
  Upper limb muscle rate|bodyFatConfig.upMuscle|double|
- Lower limb muscles rate|bodyFatConfig.downMuscle|double|
+ Lower limb muscle rate|bodyFatConfig.downMuscle|double|
