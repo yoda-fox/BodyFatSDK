@@ -70,21 +70,21 @@ public class BluetoothUtil {
         public void onScanResult(int callbackType, ScanResult result) {
             super.onScanResult(callbackType, result);
             bluetoothSearchListener.onSearchCallback(result);
-    }
+        }
 
-    @Override
-    public void onScanFailed(int errorCode) {
-        super.onScanFailed(errorCode);
-        stopSearchDevice();
-        Log.e(TAG, "scanFailed=" + errorCode);
-    }
-};
+        @Override
+        public void onScanFailed(int errorCode) {
+            super.onScanFailed(errorCode);
+            stopSearchDevice();
+            Log.e(TAG, "scanFailed=" + errorCode);
+        }
+    };
 
-public void stopSearchDevice(){
-        if(scanner!=null){
-        scanner.stopScan(leCallback);
-        searchStatus=false;
-        Log.e(TAG,"stopSearch");
+    public void stopSearchDevice() {
+        if (scanner != null) {
+            scanner.stopScan(leCallback);
+            searchStatus = false;
+            Log.e(TAG, "stopSearch");
         }
-        }
-        }
+    }
+}

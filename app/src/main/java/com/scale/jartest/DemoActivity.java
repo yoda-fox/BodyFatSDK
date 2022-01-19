@@ -164,6 +164,6 @@ public class DemoActivity extends AppCompatActivity implements BluetoothUtil.Blu
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        BluetoothUtil.getInstance().searchDevice();
+        BluetoothUtil.getInstance().stopSearchDevice();
     }
 }
