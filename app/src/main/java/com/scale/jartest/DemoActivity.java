@@ -121,7 +121,7 @@ public class DemoActivity extends AppCompatActivity implements BluetoothUtil.Blu
         builder.append("> <Upper limb fat:").append(bodyFatConfig.upFat);
         builder.append("> <Lower limb fat:").append(bodyFatConfig.downFat);
         builder.append("> <Upper limb muscle:").append(bodyFatConfig.upMuscle);
-        builder.append("> <Lower limb muscles:").append(bodyFatConfig.downMuscle);
+        builder.append("> <Lower limb muscle:").append(bodyFatConfig.downMuscle);
         builder.append(">");
         tvResult.setText(builder.toString());
     }
