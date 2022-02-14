@@ -19,8 +19,12 @@
 
 ## 3.Add permissions in the file of “manifest”
     <uses-permission android:name="android.permission.INTERNET"/>
+## 4.Code obfuscation
+-keep public class com.scale.bluetoothlibrary.** {*;}
+-keep class com.google.gson.** {*;}
+-keep class com.squareup.okhttp3.** { *;}
 
-## 4.Start access
+## 5.Start access
 
 ### 1) Initialization
  `BodySDKManager.getInstance().init(this, "appid", "secret", OnStatusListener);//Fill in the parameters appid, secret that you applied for.`
