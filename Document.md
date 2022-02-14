@@ -16,8 +16,13 @@
 
 ## 3.在manifest文件里添加权限
     <uses-permission android:name="android.permission.INTERNET"/>
+    
+## 4.代码需要混淆的在 proguard-rules.pro文件里添加
+-keep public class com.scale.bluetoothlibrary.** {*;}
+-keep class com.google.gson.** {*;}
+-keep class com.squareup.okhttp3.** { *;}
 
-## 4.开始接入
+## 5.开始接入
 
 ### 1)初始化
  `BodySDKManager.getInstance().init(this, "appid", "secret", OnStatusListener);//参数appid、secret填入自己申请的。`
