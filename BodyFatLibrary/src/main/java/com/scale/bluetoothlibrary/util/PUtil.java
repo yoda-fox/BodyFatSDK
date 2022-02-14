@@ -1,4 +1,4 @@
-package com.scale.bluetoothlibrary;
+package com.scale.bluetoothlibrary.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

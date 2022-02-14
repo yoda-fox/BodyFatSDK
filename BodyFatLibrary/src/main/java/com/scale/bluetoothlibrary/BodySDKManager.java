@@ -1,7 +1,6 @@
 package com.scale.bluetoothlibrary;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.scale.bluetoothlibrary.bluetooth.BluetoothUtil;
 import com.scale.bluetoothlibrary.bluetooth.DeviceConfig;
@@ -9,7 +8,7 @@ import com.scale.bluetoothlibrary.listener.OnConfigListener;
 import com.scale.bluetoothlibrary.listener.OnStatusListener;
 import com.scale.bluetoothlibrary.util.Constants;
 import com.scale.bluetoothlibrary.util.HttpUtil;
-import com.scale.bluetoothlibrary.util.StringUtil;
+import com.scale.bluetoothlibrary.util.PUtil;
 
 import java.util.HashMap;
 import java.util.Map;
