@@ -110,7 +110,7 @@
  SCAN_RECORD|Broadcast packet|byte[]
 
 ## Result Callback description
-### BodyFatConfig(Human body data)
+### BodyFatConfig(Human body data,Weight unit: kg)
 
  Data name     |How to Obtain   |Data type|Description
  -------- | :-----------:  | :-----------: | :-----------:
