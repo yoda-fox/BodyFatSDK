@@ -16,8 +16,15 @@
 
 ## 3.在manifest文件里添加权限
     <uses-permission android:name="android.permission.INTERNET"/>
+    
+## 4.代码需要混淆的在 proguard-rules.pro文件里添加
+-keep public class com.scale.bluetoothlibrary.** {*;}
 
-## 4.开始接入
+-keep class com.google.gson.** {*;}
+
+-keep class com.squareup.okhttp3.** { *;}
+
+## 5.开始接入
 
 ### 1)初始化
  `BodySDKManager.getInstance().init(this, "appid", "secret", OnStatusListener);//参数appid、secret填入自己申请的。`
@@ -101,7 +108,7 @@
  SCAN_RECORD|广播数据包|byte[]
 
 ## 回调结果说明
-### BodyFatConfig(人体各项数据)
+### BodyFatConfig(人体各项数据,重量单位：kg)
 
  数据名称     |获取方法   |数据类型|描述
  -------- | :-----------:  | :-----------: | :-----------:
@@ -213,20 +220,20 @@ lightFat = 41f; <br>
 身高：小于 160cm<br>
 low = 38.5f;<br>
 mid = 46.5f;<br>
-身高： 大于等于160， 小于等于170 的<br>
+身高： 大于等于160cm， 小于等于170cm 的<br>
 low = 44f;<br>
 mid = 52.4f;<br>
-如果年龄： 大于 170 的<br>
+身高： 大于 170cm 的<br>
 low = 49.4f;<br>
 mid = 59.4f;
 #### 女性：
 身高：小于 150cm<br>
 low = 29.1f;<br>
 mid = 34.7f;<br>
-身高： 大于等于150， 小于等于160 的<br>
+身高： 大于等于150cm， 小于等于160cm 的<br>
 low = 32.9f;<br>
 mid = 37.5f;<br>
-如果年龄： 大于 170 的<br>
+身高： 大于 170cm 的<br>
 low = 36.5f;<br>
 mid = 42.5f;
  分类     |标准范围
@@ -260,20 +267,20 @@ mid = 60f;
 如果体重：小于 60kg<br>
 low = 2.4f;<br>
 mid = 2.6f;<br>
-如果体重： 大于等于60， 小于等于75 的<br>
+如果体重： 大于等于60kg， 小于等于75kg 的<br>
 low = 2.8f;<br>
 mid = 3.0f;<br>
-如果体重： 大于 75 的<br>
+如果体重： 大于 75kg 的<br>
 low = 3.1f;<br>
 mid = 3.3f;
 #### 女性：
 如果体重：小于 45kg<br>
 low = 1.7f;<br>
 mid = 1.9f;<br>
-如果体重： 大于等于45， 小于等于60 的<br>
+如果体重： 大于等于45kg， 小于等于60kg 的<br>
 low = 2.1f;<br>
 mid = 2.3f;<br>
-如果体重： 大于 60 的<br>
+如果体重： 大于 60kg 的<br>
 low = 2.4f;<br>
 mid = 2.6f;
  分类     |标准范围

@@ -17,10 +17,16 @@
         maven { url 'https://jitpack.io' }
     }
 
-## 3.Add permissions in the file of “manifest”
+## 3.Add permissions in the file of "manifest"
     <uses-permission android:name="android.permission.INTERNET"/>
+## 4.Code obfuscation，add in "proguard-rules.pro" file
+-keep public class com.scale.bluetoothlibrary.** {*;}
 
-## 4.Start access
+-keep class com.google.gson.** {*;}
+
+-keep class com.squareup.okhttp3.** { *;}
+
+## 5.Start access
 
 ### 1) Initialization
  `BodySDKManager.getInstance().init(this, "appid", "secret", OnStatusListener);//Fill in the parameters appid, secret that you applied for.`
@@ -37,7 +43,7 @@
 	     Map<String, Object> params = new HashMap<>();
             params.put(Constants.LOGIN_ACCOUNT, "email2@163.com");//user account
             params.put(Constants.THIRD_USERNO, 1000);//user ID
-            params.put(Constants.THIRD_NICKNAME, "测试");//nickname
+            params.put(Constants.THIRD_NICKNAME, "test");//nickname
             params.put(Constants.HEIGHT, 170);//Height
             params.put(Constants.AGE, 20);//Age
             params.put(Constants.SEX, 1);//Gender: 1-male, 0-female
@@ -104,7 +110,7 @@
  SCAN_RECORD|Broadcast packet|byte[]
 
 ## Result Callback description
-### BodyFatConfig(Human body data)
+### BodyFatConfig(Human body data,Weight unit: kg)
 
  Data name     |How to Obtain   |Data type|Description
  -------- | :-----------:  | :-----------: | :-----------:
