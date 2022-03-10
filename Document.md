@@ -15,7 +15,10 @@
     }
 
 ## 3.在manifest文件里添加权限
-    <uses-permission android:name="android.permission.INTERNET"/>
+       <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     
 ## 4.代码需要混淆的在 proguard-rules.pro文件里添加
 -keep public class com.scale.bluetoothlibrary.** {*;}
