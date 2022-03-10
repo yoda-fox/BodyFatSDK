@@ -1,4 +1,4 @@
-package com.scale.jartest;
+package com.scale.bluetoothlibrary.bluetooth;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
@@ -11,8 +11,8 @@ import android.util.Log;
 
 import com.scale.bluetoothlibrary.util.StringUtil;
 
-public class BluetoothUtil {
-    private static BluetoothUtil bluetoothUtil;
+public class ScanUtil {
+    private static ScanUtil bluetoothUtil;
     public BluetoothManager mBluetoothManager;
     public BluetoothAdapter mBluetoothAdapter;
     private BluetoothLeScanner scanner;
@@ -20,9 +20,9 @@ public class BluetoothUtil {
     private final String TAG = "BluetoothUtil";
     private boolean searchStatus;
 
-    public static BluetoothUtil getInstance() {
+    public static ScanUtil getInstance() {
         if (bluetoothUtil == null) {
-            bluetoothUtil = new BluetoothUtil();
+            bluetoothUtil = new ScanUtil();
         }
         return bluetoothUtil;
     }
@@ -69,7 +69,10 @@ public class BluetoothUtil {
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
             super.onScanResult(callbackType, result);
-            bluetoothSearchListener.onSearchCallback(result);
+            String data = StringUtil.bytes2HexString(result.getScanRecord().getBytes());
+            if (data.startsWith(BluetoothUtil.COMMON) || data.startsWith(BluetoothUtil.TM)) {
+                bluetoothSearchListener.onSearchCallback(result);
+            }
         }
 
         @Override

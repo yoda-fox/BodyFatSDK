@@ -1,6 +1,8 @@
-package com.scale.jartest;
+package com.scale.bluetoothlibrary.bluetooth;
 
 import android.content.Context;
+
+import com.scale.bluetoothlibrary.R;
 
 public class BodyFatUtil {
     public static String getObesityLevel(Context context, int code) {

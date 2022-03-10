@@ -18,10 +18,11 @@ import androidx.core.app.ActivityCompat;
 
 import com.scale.bluetoothlibrary.BodySDKManager;
 import com.scale.bluetoothlibrary.bean.BodyFatConfig;
+import com.scale.bluetoothlibrary.bluetooth.BodyFatUtil;
+import com.scale.bluetoothlibrary.bluetooth.ScanUtil;
 import com.scale.bluetoothlibrary.listener.OnConfigListener;
 import com.scale.bluetoothlibrary.listener.OnStatusListener;
 import com.scale.bluetoothlibrary.util.Constants;
-import com.scale.bluetoothlibrary.util.StringUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +30,7 @@ import java.util.Map;
 /**
  * Provide demos and library-dependent projects used by third-party vendors
  */
-public class DemoActivity extends AppCompatActivity implements BluetoothUtil.BluetoothSearchListener, OnStatusListener, OnConfigListener, View.OnClickListener {
+public class DemoActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView tvResult;
     private final int REQUEST_CODE_ACCESS_LOCATION = 100;
 
@@ -39,26 +40,40 @@ public class DemoActivity extends AppCompatActivity implements BluetoothUtil.Blu
         setContentView(R.layout.activity_demo);
         findViewById(R.id.button).setOnClickListener(this);
         tvResult = findViewById(R.id.tv_result);
-        BluetoothUtil.getInstance().init(this);
-        BluetoothUtil.getInstance().registerBluetoothListener(this);
+        initData();
+    }
+
+    /**
+     * step 1
+     */
+    private void initData() {
+        //request  LocationPermission
         requestLocationPermission();
         //initSDK
         BodySDKManager.getInstance().init(this, "d82a7485030fe83b0d955f4792f0ce04",
-                "XenwE4VpZxRX0xMfSiqCkdKgzzPq0JGUSFCEzXv0pvMzfBzg5gS91vKyL3fAXj4Q", this);
+                "XenwE4VpZxRX0xMfSiqCkdKgzzPq0JGUSFCEzXv0pvMzfBzg5gS91vKyL3fAXj4Q", bluetoothSearchListener, onStatusListener);
+        //Or Write your own bluetooth scan method
+      /*  BodySDKManager.getInstance().init(this, "d82a7485030fe83b0d955f4792f0ce04",
+                "XenwE4VpZxRX0xMfSiqCkdKgzzPq0JGUSFCEzXv0pvMzfBzg5gS91vKyL3fAXj4Q", onStatusListener);*/
     }
 
     /**
      * Initialization SDK  result callback
      */
-    @Override
-    public void onStatus(int code, String message) {
-        Log.e("DemoActivityTAG", "message=" + message);
-    }
+    private final OnStatusListener onStatusListener = new OnStatusListener() {
+        @Override
+        public void onStatus(int code, String message) {
+            Log.e("DemoActivityTAG", "message=" + message);
+        }
+    };
 
+    /**
+     * step 2
+     */
     @Override
     public void onClick(View v) {
         if (BluetoothAdapter.getDefaultAdapter().isEnabled()) {//Determine whether Bluetooth is turned on
-            BluetoothUtil.getInstance().searchDevice();//scan device
+            ScanUtil.getInstance().searchDevice();//scan device
         } else {
             Toast.makeText(this, "Please turn on bluetooth", Toast.LENGTH_SHORT).show();
         }
@@ -66,70 +81,80 @@ public class DemoActivity extends AppCompatActivity implements BluetoothUtil.Blu
 
     /**
      * scan result callback
+     * <p>
+     * step 3   Encapsulate request parameters
      */
-    @Override
-    public void onSearchCallback(ScanResult result) {
-        Map<String, Object> params = new HashMap<>();
-        params.put(Constants.LOGIN_ACCOUNT, "email@163.com");
-        params.put(Constants.THIRD_USERNO, 1000);
-        params.put(Constants.THIRD_NICKNAME, "test");
-        params.put(Constants.HEIGHT, 170);
-        params.put(Constants.AGE, 20);
-        params.put(Constants.SEX, 1);
-        params.put(Constants.SCALE_TYPE, 1);//1.Four electrodes,2.Eight electrodes
-        params.put(Constants.SCAN_RECORD, result.getScanRecord().getBytes());
-        //Encapsulate request parameters
-        BodySDKManager.getInstance().getBodyParameter(params, DemoActivity.this);
-    }
+
+    private final ScanUtil.BluetoothSearchListener bluetoothSearchListener = new ScanUtil.BluetoothSearchListener() {
+        @Override
+        public void onSearchCallback(ScanResult result) {
+            String macAddress = result.getDevice().getAddress();
+            Map<String, Object> params = new HashMap<>();
+            params.put(Constants.LOGIN_ACCOUNT, "email@163.com");
+            params.put(Constants.THIRD_USERNO, 1000);
+            params.put(Constants.THIRD_NICKNAME, "test");
+            params.put(Constants.HEIGHT, 170);
+            params.put(Constants.AGE, 20);
+            params.put(Constants.SEX, 1);
+            params.put(Constants.SCALE_TYPE, 1);//1.Four electrodes,2.Eight electrodes
+            params.put(Constants.SCAN_RECORD, result.getScanRecord().getBytes());
+            //Encapsulate request parameters
+            BodySDKManager.getInstance().getBodyParameter(params, onConfigListener);
+        }
+    };
 
     /**
      * example:Callback for the success of obtaining various data of the human body
      */
     @SuppressLint("DefaultLocale")
-    @Override
-    public void onDataSuccess(BodyFatConfig bodyFatConfig) {
-        BluetoothUtil.getInstance().stopSearchDevice();
-        StringBuilder builder = new StringBuilder();
-        builder.append("<weight:").append(String.format("%.2f", bodyFatConfig.weight));
-        builder.append("> <BMI:").append(String.format("%.1f", bodyFatConfig.BMI));
-        builder.append("> <fat rate:").append(String.format("%.1f%% ", bodyFatConfig.fatRate));
-        builder.append("> <fat mass:").append(String.format("%.2fkg ", bodyFatConfig.fatKg));
-        builder.append("> <Subcutaneous fat rate:").append(String.format("%.1f%% ", bodyFatConfig.subcutaneousFatRate));
-        builder.append("> <Subcutaneous fat:").append(String.format("%.2fkg ", bodyFatConfig.subcutaneousFatKg));
-        builder.append("> <Muscle rate:").append(String.format("%.1f%% ", bodyFatConfig.muscleRate));
-        builder.append("> <Muscle mass:").append(String.format("%.2fkg ", bodyFatConfig.muscleKg));
-        builder.append("> <Water:").append(String.format("%.1f%% ", bodyFatConfig.waterRate));
-        builder.append("> <Moisture:").append(String.format("%.2fkg ", bodyFatConfig.waterKg));
-        builder.append("> <Visceral fat grade:").append(String.format("%d ", bodyFatConfig.visceralFat));
-        builder.append("> <Visceral fat area:").append(String.format("%.1fcm² ", bodyFatConfig.visceralFatKg));
-        builder.append("> <Bone mass:").append(String.format("%.2fkg ", bodyFatConfig.boneKg));
-        builder.append("> <Bone rate:").append(String.format("%.1f%% ", bodyFatConfig.boneRate));
-        builder.append("> <BMR:").append(String.format("%.1f ", bodyFatConfig.BMR));
-        builder.append("> <Protein rate:").append(String.format("%.1f%% ", bodyFatConfig.proteinPercentageRate));
-        builder.append("> <Protein mass:").append(String.format("%.2fkg ", bodyFatConfig.proteinPercentageKg));
-        builder.append("> <Physical age:").append(String.format("%d ", bodyFatConfig.bodyAge));
-        builder.append("> <Fat free body weight:").append(String.format("%.2fkg ", bodyFatConfig.notFatWeight));
-        builder.append("> <Standard weight:").append(String.format("%.2fkg ", bodyFatConfig.standardWeight));
-        builder.append("> <Weight control:").append(String.format("%.2fkg ", bodyFatConfig.controlWeight));
-        builder.append("> <Fat control:").append(String.format("%.2fkg ", bodyFatConfig.controlFatKg));
-        builder.append("> <Muscle control:").append(String.format("%.2fkg ", bodyFatConfig.controlMuscleKg));
-        builder.append("> <Obesity degree:").append(BodyFatUtil.getObesityLevel(DemoActivity.this, bodyFatConfig.obesityLevel));
-        builder.append("> <Health level:").append(BodyFatUtil.getHealthLevel(DemoActivity.this, bodyFatConfig.healthLevel));
-        builder.append("> <Body score:").append(bodyFatConfig.bodyScore);
-        builder.append("> <Body type:").append(BodyFatUtil.getBodyType(DemoActivity.this, bodyFatConfig.bodyType));
-        builder.append("> <Impedance type:").append(BodyFatUtil.getImpedanceStatus(DemoActivity.this, bodyFatConfig.impedanceStatus));
-        builder.append("> <Upper limb fat:").append(bodyFatConfig.upFat);
-        builder.append("> <Lower limb fat:").append(bodyFatConfig.downFat);
-        builder.append("> <Upper limb muscle:").append(bodyFatConfig.upMuscle);
-        builder.append("> <Lower limb muscle:").append(bodyFatConfig.downMuscle);
-        builder.append(">");
-        tvResult.setText(builder.toString());
-    }
 
-    @Override
-    public void onDataFail(int code, String error) {
-        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
-    }
+    private final OnConfigListener onConfigListener = new OnConfigListener() {
+        @Override
+        public void onDataSuccess(BodyFatConfig bodyFatConfig) {
+            ScanUtil.getInstance().stopSearchDevice();
+            StringBuilder builder = new StringBuilder();
+            builder.append("<weight:").append(String.format("%.2f", bodyFatConfig.weight));
+            builder.append("> <BMI:").append(String.format("%.1f", bodyFatConfig.BMI));
+            builder.append("> <fat rate:").append(String.format("%.1f%% ", bodyFatConfig.fatRate));
+            builder.append("> <fat mass:").append(String.format("%.2fkg ", bodyFatConfig.fatKg));
+            builder.append("> <Subcutaneous fat rate:").append(String.format("%.1f%% ", bodyFatConfig.subcutaneousFatRate));
+            builder.append("> <Subcutaneous fat:").append(String.format("%.2fkg ", bodyFatConfig.subcutaneousFatKg));
+            builder.append("> <Muscle rate:").append(String.format("%.1f%% ", bodyFatConfig.muscleRate));
+            builder.append("> <Muscle mass:").append(String.format("%.2fkg ", bodyFatConfig.muscleKg));
+            builder.append("> <Water:").append(String.format("%.1f%% ", bodyFatConfig.waterRate));
+            builder.append("> <Moisture:").append(String.format("%.2fkg ", bodyFatConfig.waterKg));
+            builder.append("> <Visceral fat grade:").append(String.format("%d ", bodyFatConfig.visceralFat));
+            builder.append("> <Visceral fat area:").append(String.format("%.1fcm² ", bodyFatConfig.visceralFatKg));
+            builder.append("> <Bone mass:").append(String.format("%.2fkg ", bodyFatConfig.boneKg));
+            builder.append("> <Bone rate:").append(String.format("%.1f%% ", bodyFatConfig.boneRate));
+            builder.append("> <BMR:").append(String.format("%.1f ", bodyFatConfig.BMR));
+            builder.append("> <Protein rate:").append(String.format("%.1f%% ", bodyFatConfig.proteinPercentageRate));
+            builder.append("> <Protein mass:").append(String.format("%.2fkg ", bodyFatConfig.proteinPercentageKg));
+            builder.append("> <Physical age:").append(String.format("%d ", bodyFatConfig.bodyAge));
+            builder.append("> <Fat free body weight:").append(String.format("%.2fkg ", bodyFatConfig.notFatWeight));
+            builder.append("> <Standard weight:").append(String.format("%.2fkg ", bodyFatConfig.standardWeight));
+            builder.append("> <Weight control:").append(String.format("%.2fkg ", bodyFatConfig.controlWeight));
+            builder.append("> <Fat control:").append(String.format("%.2fkg ", bodyFatConfig.controlFatKg));
+            builder.append("> <Muscle control:").append(String.format("%.2fkg ", bodyFatConfig.controlMuscleKg));
+            builder.append("> <Obesity degree:").append(BodyFatUtil.getObesityLevel(DemoActivity.this, bodyFatConfig.obesityLevel));
+            builder.append("> <Health level:").append(BodyFatUtil.getHealthLevel(DemoActivity.this, bodyFatConfig.healthLevel));
+            builder.append("> <Body score:").append(bodyFatConfig.bodyScore);
+            builder.append("> <Body type:").append(BodyFatUtil.getBodyType(DemoActivity.this, bodyFatConfig.bodyType));
+            builder.append("> <Impedance type:").append(BodyFatUtil.getImpedanceStatus(DemoActivity.this, bodyFatConfig.impedanceStatus));
+            builder.append("> <Upper limb fat:").append(bodyFatConfig.upFat);
+            builder.append("> <Lower limb fat:").append(bodyFatConfig.downFat);
+            builder.append("> <Upper limb muscle:").append(bodyFatConfig.upMuscle);
+            builder.append("> <Lower limb muscle:").append(bodyFatConfig.downMuscle);
+            builder.append(">");
+            tvResult.setText(builder.toString());
+        }
+
+        @Override
+        public void onDataFail(int code, String error) {
+            Toast.makeText(DemoActivity.this, error, Toast.LENGTH_SHORT).show();
+        }
+    };
+
 
     /**
      * request  LocationPermission
@@ -164,6 +189,6 @@ public class DemoActivity extends AppCompatActivity implements BluetoothUtil.Blu
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        BluetoothUtil.getInstance().stopSearchDevice();
+        ScanUtil.getInstance().stopSearchDevice();
     }
 }

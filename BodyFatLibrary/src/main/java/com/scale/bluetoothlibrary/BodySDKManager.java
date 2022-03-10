@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.scale.bluetoothlibrary.bluetooth.BluetoothUtil;
 import com.scale.bluetoothlibrary.bluetooth.DeviceConfig;
+import com.scale.bluetoothlibrary.bluetooth.ScanUtil;
 import com.scale.bluetoothlibrary.listener.OnConfigListener;
 import com.scale.bluetoothlibrary.listener.OnStatusListener;
 import com.scale.bluetoothlibrary.util.Constants;
@@ -33,13 +34,24 @@ public class BodySDKManager {
     }
 
     /**
+     * get access_token
+     */
+    public void init(Context context, String appid, String secret, ScanUtil.BluetoothSearchListener bluetoothSearchListener, OnStatusListener onStatusListener) {
+        PUtil.init(context);
+        ScanUtil.getInstance().init(context);
+        ScanUtil.getInstance().registerBluetoothListener(bluetoothSearchListener);
+        HttpUtil.getInstance().setStatusListener(onStatusListener);
+        HttpUtil.getInstance().getAccessToken(appid, secret);
+    }
+
+    /**
      * get body data
      */
     public void getBodyParameter(Map<String, Object> params, OnConfigListener onConfigListener) {
         byte[] scanRecord = (byte[]) params.get(Constants.SCAN_RECORD);
         HttpUtil.getInstance().setConfigListener(onConfigListener);
         DeviceConfig deviceConfig = BluetoothUtil.parsingData(scanRecord);
-        if(deviceConfig!=null) {
+        if (deviceConfig != null) {
             Map<String, Object> paramMap = new HashMap<>();
             paramMap.put(Constants.LOGIN_ACCOUNT, params.get(Constants.LOGIN_ACCOUNT));
             paramMap.put(Constants.THIRD_USERNO, params.get(Constants.THIRD_USERNO));
