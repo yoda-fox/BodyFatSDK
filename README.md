@@ -22,7 +22,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-## 4.Code obfuscation，add in "proguard-rules.pro" file
+## 4.Add Code obfuscation in the file of "proguard-rules.pro" 
 -keep public class com.scale.bluetoothlibrary.** {*;}
 
 -keep class com.google.gson.** {*;}
