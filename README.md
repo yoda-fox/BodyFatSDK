@@ -18,7 +18,10 @@
     }
 
 ## 3.Add permissions in the file of "manifest"
-    <uses-permission android:name="android.permission.INTERNET"/>
+     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 ## 4.Code obfuscation，add in "proguard-rules.pro" file
 -keep public class com.scale.bluetoothlibrary.** {*;}
 
