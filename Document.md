@@ -7,7 +7,7 @@
     2.依赖环境androidx
 
 ## 1.在budid.gradle(Module:app)文件里添加依赖：
-       implementation 'com.github.yoda-fox:BodyFatSDK:2.1.1'
+       implementation 'com.github.yoda-fox:BodyFatSDK:2.1.2'
 
 ## 2.在budid.gradle(Project:projectName)里添加
     repositories {
