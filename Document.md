@@ -158,9 +158,9 @@
 #### 女标准：
    standardWeight = height*height * 20; --身高单位米
 #### 范围：
-   downWeight = 18.5f * height*height;<br>
-   upWeight = 24f * height*height;<br>
-   fatWeight = 27f * height*height;<br>
+   downWeight = 18.5 * height*height;<br>
+   upWeight = 24 * height*height;<br>
+   fatWeight = 27 * height*height;<br>
 #### 人的体重范围：
  分类     |标准范围
  -------- | :-----------:
@@ -180,13 +180,13 @@
 ### 3.脂肪率
 #### 男性：
 如果年龄：小于 40
-low = 10f;<br>
-stander = 21f;<br>
-lightFat = 26f;<br>
+low = 10;<br>
+stander = 21;<br>
+lightFat = 26;<br>
 如果年龄： 大于等于40， 小于60 的<br>
-low = 11f;<br>
-stander = 22f;<br>
-lightFat = 27f;<br>
+low = 11;<br>
+stander = 22;<br>
+lightFat = 27;<br>
 如果年龄： 大于等于60 的<br>
 low = 13f;<br>
 stander = 24f;<br>
@@ -194,16 +194,16 @@ lightFat = 29f;<br>
 #### 女性：
 如果年龄：小于 40<br>
 low = 20f;<br>
-stander = 34f;<br>
-lightFat = 39f;<br>
+stander = 34;<br>
+lightFat = 39;<br>
 如果年龄： 大于等于40， 小于60 的<br>
-low = 21f;<br>
-stander = 35f;<br>
-lightFat = 40f;<br>
+low = 21;<br>
+stander = 35;<br>
+lightFat = 40;<br>
 如果年龄： 大于等于60 的<br>
-low = 22f;<br>
-stander = 36f;<br>
-lightFat = 41f; <br>
+low = 22;<br>
+stander = 36;<br>
+lightFat = 41; <br>
 
  分类     |标准范围
  -------- | :-----------:
