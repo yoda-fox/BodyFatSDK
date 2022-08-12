@@ -153,12 +153,14 @@
 ## 参数范围说明
 ### 1.体重
 #### 标准体重：standardWeight
-#### 男标准范围：
-    float downWeight = standardWeight  - standardWeight  * 0.1f;
-#### 女标准范围：
-    float upWeight = standardWeight  + standardWeight  * 0.1f; 
-#### 偏胖范围：
-    float fatWeight = standardWeight  + standardWeight  * 0.2f;
+#### 男标准：
+   standardWeight = height*height * 22; --身高单位米
+#### 女标准：
+   standardWeight = height*height * 20;; --身高单位米
+#### 范围：
+   downWeight = 18.5f * height*height;
+   upWeight = 24f * height*height;
+   fatWeight = 27f * height*height;
 #### 人的体重范围：
  分类     |标准范围
  -------- | :-----------:
