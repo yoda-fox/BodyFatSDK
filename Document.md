@@ -156,11 +156,11 @@
 #### 男标准：
    standardWeight = height*height * 22; --身高单位米
 #### 女标准：
-   standardWeight = height*height * 20;; --身高单位米
+   standardWeight = height*height * 20; --身高单位米
 #### 范围：
-   downWeight = 18.5f * height*height;
-   upWeight = 24f * height*height;
-   fatWeight = 27f * height*height;
+   downWeight = 18.5f * height*height;<br>
+   upWeight = 24f * height*height;<br>
+   fatWeight = 27f * height*height;<br>
 #### 人的体重范围：
  分类     |标准范围
  -------- | :-----------:
